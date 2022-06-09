@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+         label 'jdk11'
+         }
+    stages {
+        stage('Git') {
+            steps {
+               git branch: 'main', url: 'https://github.com/saikumarvenkata/nodejs-e2e-express-server.git'
+            }
+        }
+        stage('install the dependecies'){
+             steps(
+                   sh "npm install"
+          }
+              }
+          stage('test'){
+                 steps(
+                      sh "npm test"
+           }
+               }
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+    }
+}
